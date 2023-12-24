@@ -11,11 +11,10 @@ namespace Conveniencia.Model
         public string Nome { get; set; }
         public string CNPJ { get; set; }
         public string Telefone { get; set; }
-        public int MyProperty { get; set; }
         public bool Ativo { get; set; }
-        
 
 
-        public List<Produto> Produtos { get; set; } = new();
+
+        public IList<Produto> Produtos { get; set; } 
     }
 }

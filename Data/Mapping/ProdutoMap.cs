@@ -21,9 +21,47 @@ namespace Conveniencia.Data.Mapping
             .ValueGeneratedOnAdd()
             .UseIdentityColumn();
 
-    
+            //Propriedades
+            builder.Property(x => x.Nome)
+            .IsRequired()
+            .HasColumnName("Nome")
+            .HasColumnType("NVARCHAR")
+            .HasMaxLength(120);
+
+            builder.Property(x => x.Estoque)
+            .IsRequired()
+            .HasColumnName("Estoque")
+            .HasColumnType("INT");
 
 
+
+            builder.Property(x => x.Preco)
+            .IsRequired()
+            .HasColumnName("Preco")
+            .HasColumnType("DECIMAL");
+
+            builder.Property(x => x.Ativo)
+            .HasColumnName("Ativo")
+            .HasColumnType("BIT");
+
+            //Realacionamento
+            builder
+            .HasMany(x => x.Fornecedors)
+            .WithMany(x => x.Produtos)
+            .UsingEntity<Dictionary<string,object>>(
+                "ProdutoFornecedor",
+                produto => produto
+                .HasOne<Fornecedor>()
+                .WithMany()
+                .HasForeignKey("ProdutoId")
+                .HasConstraintName("FK_ProdutoForneedor_ProdutoId")
+                .OnDelete(DeleteBehavior.Cascade),
+                fornecedor => fornecedor
+                .HasOne<Produto>()
+                .WithMany()
+                .HasForeignKey("FornecedorId")
+                .HasConstraintName("FK_ProdutoForneedor_FornecedorId")
+                .OnDelete(DeleteBehavior.Cascade));
 
         }
     }
