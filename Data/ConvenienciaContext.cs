@@ -21,7 +21,7 @@ public DbSet<Usuario> Usuarios {get;set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
           modelBuilder.ApplyConfiguration(new ProdutoMap());
-          //modelBuilder.ApplyConfiguration(new UsuarioMap());
+          modelBuilder.ApplyConfiguration(new UsuarioMap());
           //modelBuilder.ApplyConfiguration(new FornecedorMap());
         }
 
